@@ -25,9 +25,15 @@ export function missingSupabaseEnv() {
     `${name}: at build ${built.trim() ? `${built.length} chars` : "missing"}, at runtime ${
       runtime(name) ? `${runtime(name).length} chars` : "missing"
     }`;
+  // Variable names only (JSON-quoted so stray spaces show), never values
+  const names = typeof process !== "undefined" ? Object.keys(process.env) : [];
+  const supabaseNames = names.filter((name) => /supabase/i.test(name)).map((name) => JSON.stringify(name));
   return [
     describe(URL_NAME, builtUrl),
     describe(KEY_NAMES[0], process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ""),
     describe(KEY_NAMES[1], process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? ""),
+    `GEMINI_API_KEY at runtime: ${runtime("GEMINI_API_KEY") ? "set" : "missing"}`,
+    `Vercel environment: ${runtime("VERCEL_ENV") || "unknown"} (target ${runtime("VERCEL_TARGET_ENV") || "unknown"}), ${names.length} variables visible`,
+    `Variable names containing "supabase": ${supabaseNames.join(", ") || "none"}`,
   ];
 }
