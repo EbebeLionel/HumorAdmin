@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { SUPABASE_KEY, SUPABASE_URL, missingSupabaseEnv } from "@/lib/supabase/env";
 
 // The only routes reachable without being a superadmin: the login wall itself
 const PUBLIC_PATHS = ["/login", "/auth/callback", "/auth/signout"];
@@ -7,11 +8,19 @@ const PUBLIC_PATHS = ["/login", "/auth/callback", "/auth/signout"];
 // Every other route requires a signed-in user whose profiles.is_superadmin is true.
 // Pages and server actions check again (requireAdmin), and RLS checks a third time.
 export async function proxy(request: NextRequest) {
+  const missing = missingSupabaseEnv();
+  if (missing.length) {
+    return new NextResponse(
+      `Admin panel is misconfigured. Missing environment variables: ${missing.join(", ")}. Add them in Vercel → Settings → Environment Variables, then redeploy.`,
+      { status: 500, headers: { "content-type": "text/plain; charset=utf-8" } }
+    );
+  }
+
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    SUPABASE_URL,
+    SUPABASE_KEY,
     {
       cookies: {
         getAll() {
