@@ -9,9 +9,9 @@ const PUBLIC_PATHS = ["/login", "/auth/callback", "/auth/signout"];
 // Pages and server actions check again (requireAdmin), and RLS checks a third time.
 export async function proxy(request: NextRequest) {
   const missing = missingSupabaseEnv();
-  if (missing.length) {
+  if (missing) {
     return new NextResponse(
-      `Admin panel is misconfigured. Missing environment variables: ${missing.join(", ")}. Add them in Vercel → Settings → Environment Variables, then redeploy.`,
+      `Admin panel is misconfigured: it needs NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY (or NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY). Add them in Vercel → Settings → Environment Variables, then redeploy.\n\nWhat this deployment sees:\n${missing.join("\n")}`,
       { status: 500, headers: { "content-type": "text/plain; charset=utf-8" } }
     );
   }
