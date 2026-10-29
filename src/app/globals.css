@@ -1022,3 +1022,172 @@ textarea.input {
     padding: 1.25rem 1rem 2.5rem;
   }
 }
+
+/* ---------- Week 7: generic resource pages ---------- */
+.side-nav {
+  overflow-y: auto;
+}
+
+.side-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  margin-top: 0.9rem;
+}
+
+.side-group-label {
+  padding: 0 0.7rem 0.25rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.table td.wide {
+  min-width: 260px;
+  max-width: 460px;
+}
+
+.table td.nowrap,
+.nowrap {
+  white-space: nowrap;
+}
+
+.thumb-cell img {
+  display: block;
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--page);
+}
+
+.mono {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.85em;
+}
+
+.ops {
+  display: flex;
+  gap: 0.35rem;
+  margin-top: -0.4rem;
+}
+
+.row-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.narrow {
+  max-width: 640px;
+}
+
+.fields dd {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.prompt-block {
+  margin: 0;
+  max-height: 340px;
+  overflow: auto;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  background: var(--page);
+  border: 1px solid var(--border);
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--ink-2);
+}
+
+.check input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+}
+
+.required {
+  color: var(--down);
+}
+
+textarea.input {
+  resize: vertical;
+  font-family: inherit;
+}
+
+.form .tabs {
+  border-bottom: 1px solid var(--border);
+}
+
+.form .tab {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.btn-block {
+  width: 100%;
+  align-self: stretch !important;
+}
+
+.or {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.4rem 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.or::before,
+.or::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.dash-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.tile-link {
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.tile-link:hover {
+  border-color: var(--accent);
+  background: var(--surface-2);
+}
+
+.thumb-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background: var(--page);
+  color: var(--muted);
+  font-size: 0.8rem;
+}

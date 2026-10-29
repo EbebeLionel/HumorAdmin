@@ -8,7 +8,6 @@ export type AdminProfile = {
   email: string | null;
   first_name: string | null;
   last_name: string | null;
-  avatar_url: string | null;
   is_superadmin: boolean;
 };
 
@@ -25,7 +24,7 @@ export async function getAdmin() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("id, email, first_name, last_name, avatar_url, is_superadmin")
+    .select("id, email, first_name, last_name, is_superadmin")
     .eq("id", user.id)
     .maybeSingle<AdminProfile>();
 
